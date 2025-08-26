@@ -43,25 +43,3 @@ mindmap
         "Máquina → Lenguaje alto nivel"
       Transpilador
         "Fuente → Otro lenguaje/versión"
-    Proceso de compilación
-      Tablas
-        Símbolos y Tipos
-      Fases específicas
-        Analizador léxico
-          "Tokens"
-        Analizador sintáctico
-          "Árbol sintáctico"
-        Analizador semántico
-          "Verificación de tipos"
-        Generador de código intermedio
-        Optimizador
-        Generador de código final
-    Creación de Lenguaje de Programación
-      "Definir lenguaje"
-      "Especificación léxica"
-      "Especificación sintáctica"
-      "Especificación semántica"
-      "Código intermedio"
-      "Lenguaje base e implementación"
-
-
