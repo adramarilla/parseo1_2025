@@ -3,7 +3,10 @@ import ply.lex as lex
 # -----------------------
 # Palabras reservadas
 # -----------------------
+# Incluye palabras de control e iteración
+
 reserved = {
+    'VAR': 'VAR',
     'SERVIDOR': 'SERVIDOR',
     'GRUPO': 'GRUPO',
     'DESPLEGAR': 'DESPLEGAR',
@@ -12,14 +15,20 @@ reserved = {
     'SERVICIO': 'SERVICIO',
     'EJECUTAR': 'EJECUTAR',
     'COPIAR_DESDE': 'COPIAR_DESDE',
+    'HACIA' : 'HACIA',
     'EN': 'EN',
     'CON': 'CON',
     'VERIFICAR': 'VERIFICAR',
     'NO_EXISTE': 'NO_EXISTE',
-    # Para iteración:
+    'DIRECCION': 'DIRECCION',
+    'HACER': 'HACER',
+    'DEBE_ESTAR_INSTALADO': 'DEBE_ESTAR_INSTALADO',
+    'DEBE_ESTAR_EN_EJECUCION': 'DEBE_ESTAR_EN_EJECUCION',
+
     'SI': 'SI',
-    'MIENTRAS': 'MIENTRAS',   # similar a WHILE
-    'HACER': 'HACER'
+    'SINO': 'SINO',
+    'MIENTRAS': 'MIENTRAS', 
+
 }
 
 # -----------------------
@@ -106,12 +115,6 @@ GRUPO webservers {
     SERVIDOR "web02" DIRECCION = "192.168.1.11"
 }
 
-DESPLEGAR mi_aplicacion EN webservers {
-    PAQUETE "nginx" DEBE_ESTAR_INSTALADO
-    SERVICIO "nginx" DEBE_ESTAR_EN_EJECUCION
-    COPIAR_DESDE "./app/*" HACIA "/var/www/html/"
-}
-
 MIENTRAS (VERIFICAR puerto != 80) HACER {
     EJECUTAR "reiniciar nginx"
 }
@@ -120,11 +123,11 @@ SI (VERIFICAR NO_EXISTE archivo) HACER {
     EJECUTAR "crear archivo de configuración"
 }
 
+VAR src = "/tmp"
+VAR dest = "/bkp"
+
 '''
 
 lexer.input(data)
-for tok in lexer:
-    print(tok)
-
 for tok in lexer:
     print(tok)
