@@ -50,7 +50,6 @@ flowchart TD
   B3 --> C2["STRING"]
   C2 --> C3["/tmp"]
 ```
-![Árboles de derivación ASD y ASA](A_pair_of_parse_trees_depicted_in_a_2D_digital_ill.png)
 
 ---
 
