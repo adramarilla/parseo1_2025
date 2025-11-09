@@ -63,23 +63,28 @@ flowchart TD
 | VAR ASIGNACION                | ASIGNACION → ID EQUALS EXPRESION |
 | VAR ID EQUALS EXPRESION       | EXPRESION → STRING               |
 | VAR ID EQUALS STRING          | Sustituir ID → src               |
-| VAR src EQUALS STRING         | Sustituir STRING → "/tmp"        |
-| VAR src EQUALS "/tmp"         | accept                           |
+| VAR src EQUALS STRING         | Sustituir EQUALS → =             |
+| VAR src = STRING              | Sustituir STRING → "/tmp"        |
+| VAR src = "/tmp"              | accept                           |
+
 
 **Resultado:**  
 ✅ La cadena `VAR src = "/tmp"` se deriva correctamente **por la izquierda** (análisis descendente).
 
 ---
 
-## ASA — Derivación por la derecha (reducción ascendente)
+## ASA — Derivación por la derecha (ascendente)
 
-| Cadena de derivación obtenida | Próxima producción a aplicar |
-|-------------------------------|------------------------------|
-| VAR src = "/tmp" | "/tmp" → EXPRESION |
-| VAR src = EXPRESION | ID EQUALS EXPRESION → ASIGNACION |
-| VAR ASIGNACION | VAR ASIGNACION → DECLARACION |
-| DECLARACION | DECLARACION → P |
-| P | accept |
+| Cadena de derivación obtenida | Próxima producción a aplicar     |
+|-------------------------------|----------------------------------|
+| VAR src = "/tmp"              | "/tmp" → STRING                  |
+| VAR src = STRING              | STRING → EXPRESION               |
+| VAR src = EXPRESION           | ID → src                         |
+| VAR ID = EXPRESION            | EQUALS → =                       |
+| VAR ID EQUALS EXPRESION       | ID EQUALS EXPRESION → ASIGNACION |
+| VAR ASIGNACION                | VAR ASIGNACION → DECLARACION     |
+| DECLARACION                   | DECLARACION → P                  |
+| P                             | accept                           |
 
 **Resultado:**  
 ✅ La cadena `VAR src = "/tmp"` es reconocida correctamente **por la derecha** (análisis ascendente).
@@ -91,4 +96,3 @@ flowchart TD
 
 - La palabra `VAR src = "/tmp"` pertenece al lenguaje.  
 - Es generada tanto por la derivación **izquierda (ASD)** como **derecha (ASA)**.  
-- La gramática cumple las propiedades necesarias para la representación de una **asignación declarativa** dentro del lenguaje.
