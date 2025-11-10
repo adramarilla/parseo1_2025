@@ -1,0 +1,979 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ARCHIVO
+    COLON
+    CON
+    DASH
+    LBRACKET
+    NO_EXISTE
+    RBRACKET
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> definiciones instrucciones
+Rule 2     definiciones -> definiciones definicion
+Rule 3     definiciones -> empty
+Rule 4     definicion -> GRUPO ID LBRACE servidores RBRACE
+Rule 5     servidores -> servidores servidor
+Rule 6     servidores -> servidor
+Rule 7     servidor -> SERVIDOR STRING DIRECCION EQUALS STRING
+Rule 8     instrucciones -> instrucciones instruccion
+Rule 9     instrucciones -> instruccion
+Rule 10    instrucciones -> empty
+Rule 11    instruccion -> despliegue
+Rule 12    instruccion -> condicional
+Rule 13    instruccion -> bucle
+Rule 14    instruccion -> asignacion
+Rule 15    despliegue -> DESPLEGAR ID EN ID LBRACE acciones RBRACE
+Rule 16    acciones -> acciones accion
+Rule 17    acciones -> accion
+Rule 18    accion -> PAQUETE STRING DEBE_ESTAR_INSTALADO
+Rule 19    accion -> SERVICIO STRING DEBE_ESTAR_EN_EJECUCION
+Rule 20    accion -> COPIAR_DESDE STRING HACIA STRING
+Rule 21    accion -> EJECUTAR STRING
+Rule 22    condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE
+Rule 23    condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE
+Rule 24    bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE
+Rule 25    asignacion -> VAR ID EQUALS valor
+Rule 26    valor -> STRING
+Rule 27    valor -> NUMBER
+Rule 28    condicion -> ID comparador valor
+Rule 29    comparador -> EQ
+Rule 30    comparador -> NEQ
+Rule 31    comparador -> GT
+Rule 32    comparador -> LT
+Rule 33    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ARCHIVO              : 
+COLON                : 
+CON                  : 
+COPIAR_DESDE         : 20
+DASH                 : 
+DEBE_ESTAR_EN_EJECUCION : 19
+DEBE_ESTAR_INSTALADO : 18
+DESPLEGAR            : 15
+DIRECCION            : 7
+EJECUTAR             : 21
+EN                   : 15
+EQ                   : 29
+EQUALS               : 7 25
+GRUPO                : 4
+GT                   : 31
+HACER                : 22 23 24
+HACIA                : 20
+ID                   : 4 15 15 25 28
+LBRACE               : 4 15 22 23 23 24
+LBRACKET             : 
+LPAREN               : 22 23 24
+LT                   : 32
+MIENTRAS             : 24
+NEQ                  : 30
+NO_EXISTE            : 
+NUMBER               : 27
+PAQUETE              : 18
+RBRACE               : 4 15 22 23 23 24
+RBRACKET             : 
+RPAREN               : 22 23 24
+SERVICIO             : 19
+SERVIDOR             : 7
+SI                   : 22 23
+SINO                 : 23
+STRING               : 7 7 18 19 20 20 21 26
+VAR                  : 25
+VERIFICAR            : 22 23 24
+error                : 
+
+Nonterminals, with rules where they appear
+
+accion               : 16 17
+acciones             : 15 16 22 23 23 24
+asignacion           : 14
+bucle                : 13
+comparador           : 28
+condicion            : 22 23 24
+condicional          : 12
+definicion           : 2
+definiciones         : 1 2
+despliegue           : 11
+empty                : 3 10
+instruccion          : 8 9
+instrucciones        : 1 8
+programa             : 0
+servidor             : 5 6
+servidores           : 4 5
+valor                : 25 28
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . definiciones instrucciones
+    (2) definiciones -> . definiciones definicion
+    (3) definiciones -> . empty
+    (33) empty -> .
+
+    GRUPO           reduce using rule 33 (empty -> .)
+    DESPLEGAR       reduce using rule 33 (empty -> .)
+    SI              reduce using rule 33 (empty -> .)
+    MIENTRAS        reduce using rule 33 (empty -> .)
+    VAR             reduce using rule 33 (empty -> .)
+    $end            reduce using rule 33 (empty -> .)
+
+    programa                       shift and go to state 1
+    definiciones                   shift and go to state 2
+    empty                          shift and go to state 3
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> definiciones . instrucciones
+    (2) definiciones -> definiciones . definicion
+    (8) instrucciones -> . instrucciones instruccion
+    (9) instrucciones -> . instruccion
+    (10) instrucciones -> . empty
+    (4) definicion -> . GRUPO ID LBRACE servidores RBRACE
+    (11) instruccion -> . despliegue
+    (12) instruccion -> . condicional
+    (13) instruccion -> . bucle
+    (14) instruccion -> . asignacion
+    (33) empty -> .
+    (15) despliegue -> . DESPLEGAR ID EN ID LBRACE acciones RBRACE
+    (22) condicional -> . SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE
+    (23) condicional -> . SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE
+    (24) bucle -> . MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE
+    (25) asignacion -> . VAR ID EQUALS valor
+
+  ! shift/reduce conflict for DESPLEGAR resolved as shift
+  ! shift/reduce conflict for SI resolved as shift
+  ! shift/reduce conflict for MIENTRAS resolved as shift
+  ! shift/reduce conflict for VAR resolved as shift
+    GRUPO           shift and go to state 8
+    $end            reduce using rule 33 (empty -> .)
+    DESPLEGAR       shift and go to state 13
+    SI              shift and go to state 14
+    MIENTRAS        shift and go to state 15
+    VAR             shift and go to state 16
+
+  ! DESPLEGAR       [ reduce using rule 33 (empty -> .) ]
+  ! SI              [ reduce using rule 33 (empty -> .) ]
+  ! MIENTRAS        [ reduce using rule 33 (empty -> .) ]
+  ! VAR             [ reduce using rule 33 (empty -> .) ]
+
+    instrucciones                  shift and go to state 4
+    definicion                     shift and go to state 5
+    instruccion                    shift and go to state 6
+    empty                          shift and go to state 7
+    despliegue                     shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle                          shift and go to state 11
+    asignacion                     shift and go to state 12
+
+state 3
+
+    (3) definiciones -> empty .
+
+    GRUPO           reduce using rule 3 (definiciones -> empty .)
+    DESPLEGAR       reduce using rule 3 (definiciones -> empty .)
+    SI              reduce using rule 3 (definiciones -> empty .)
+    MIENTRAS        reduce using rule 3 (definiciones -> empty .)
+    VAR             reduce using rule 3 (definiciones -> empty .)
+    $end            reduce using rule 3 (definiciones -> empty .)
+
+
+state 4
+
+    (1) programa -> definiciones instrucciones .
+    (8) instrucciones -> instrucciones . instruccion
+    (11) instruccion -> . despliegue
+    (12) instruccion -> . condicional
+    (13) instruccion -> . bucle
+    (14) instruccion -> . asignacion
+    (15) despliegue -> . DESPLEGAR ID EN ID LBRACE acciones RBRACE
+    (22) condicional -> . SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE
+    (23) condicional -> . SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE
+    (24) bucle -> . MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE
+    (25) asignacion -> . VAR ID EQUALS valor
+
+    $end            reduce using rule 1 (programa -> definiciones instrucciones .)
+    DESPLEGAR       shift and go to state 13
+    SI              shift and go to state 14
+    MIENTRAS        shift and go to state 15
+    VAR             shift and go to state 16
+
+    instruccion                    shift and go to state 17
+    despliegue                     shift and go to state 9
+    condicional                    shift and go to state 10
+    bucle                          shift and go to state 11
+    asignacion                     shift and go to state 12
+
+state 5
+
+    (2) definiciones -> definiciones definicion .
+
+    GRUPO           reduce using rule 2 (definiciones -> definiciones definicion .)
+    DESPLEGAR       reduce using rule 2 (definiciones -> definiciones definicion .)
+    SI              reduce using rule 2 (definiciones -> definiciones definicion .)
+    MIENTRAS        reduce using rule 2 (definiciones -> definiciones definicion .)
+    VAR             reduce using rule 2 (definiciones -> definiciones definicion .)
+    $end            reduce using rule 2 (definiciones -> definiciones definicion .)
+
+
+state 6
+
+    (9) instrucciones -> instruccion .
+
+    DESPLEGAR       reduce using rule 9 (instrucciones -> instruccion .)
+    SI              reduce using rule 9 (instrucciones -> instruccion .)
+    MIENTRAS        reduce using rule 9 (instrucciones -> instruccion .)
+    VAR             reduce using rule 9 (instrucciones -> instruccion .)
+    $end            reduce using rule 9 (instrucciones -> instruccion .)
+
+
+state 7
+
+    (10) instrucciones -> empty .
+
+    DESPLEGAR       reduce using rule 10 (instrucciones -> empty .)
+    SI              reduce using rule 10 (instrucciones -> empty .)
+    MIENTRAS        reduce using rule 10 (instrucciones -> empty .)
+    VAR             reduce using rule 10 (instrucciones -> empty .)
+    $end            reduce using rule 10 (instrucciones -> empty .)
+
+
+state 8
+
+    (4) definicion -> GRUPO . ID LBRACE servidores RBRACE
+
+    ID              shift and go to state 18
+
+
+state 9
+
+    (11) instruccion -> despliegue .
+
+    DESPLEGAR       reduce using rule 11 (instruccion -> despliegue .)
+    SI              reduce using rule 11 (instruccion -> despliegue .)
+    MIENTRAS        reduce using rule 11 (instruccion -> despliegue .)
+    VAR             reduce using rule 11 (instruccion -> despliegue .)
+    $end            reduce using rule 11 (instruccion -> despliegue .)
+
+
+state 10
+
+    (12) instruccion -> condicional .
+
+    DESPLEGAR       reduce using rule 12 (instruccion -> condicional .)
+    SI              reduce using rule 12 (instruccion -> condicional .)
+    MIENTRAS        reduce using rule 12 (instruccion -> condicional .)
+    VAR             reduce using rule 12 (instruccion -> condicional .)
+    $end            reduce using rule 12 (instruccion -> condicional .)
+
+
+state 11
+
+    (13) instruccion -> bucle .
+
+    DESPLEGAR       reduce using rule 13 (instruccion -> bucle .)
+    SI              reduce using rule 13 (instruccion -> bucle .)
+    MIENTRAS        reduce using rule 13 (instruccion -> bucle .)
+    VAR             reduce using rule 13 (instruccion -> bucle .)
+    $end            reduce using rule 13 (instruccion -> bucle .)
+
+
+state 12
+
+    (14) instruccion -> asignacion .
+
+    DESPLEGAR       reduce using rule 14 (instruccion -> asignacion .)
+    SI              reduce using rule 14 (instruccion -> asignacion .)
+    MIENTRAS        reduce using rule 14 (instruccion -> asignacion .)
+    VAR             reduce using rule 14 (instruccion -> asignacion .)
+    $end            reduce using rule 14 (instruccion -> asignacion .)
+
+
+state 13
+
+    (15) despliegue -> DESPLEGAR . ID EN ID LBRACE acciones RBRACE
+
+    ID              shift and go to state 19
+
+
+state 14
+
+    (22) condicional -> SI . LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE
+    (23) condicional -> SI . LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE
+
+    LPAREN          shift and go to state 20
+
+
+state 15
+
+    (24) bucle -> MIENTRAS . LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE
+
+    LPAREN          shift and go to state 21
+
+
+state 16
+
+    (25) asignacion -> VAR . ID EQUALS valor
+
+    ID              shift and go to state 22
+
+
+state 17
+
+    (8) instrucciones -> instrucciones instruccion .
+
+    DESPLEGAR       reduce using rule 8 (instrucciones -> instrucciones instruccion .)
+    SI              reduce using rule 8 (instrucciones -> instrucciones instruccion .)
+    MIENTRAS        reduce using rule 8 (instrucciones -> instrucciones instruccion .)
+    VAR             reduce using rule 8 (instrucciones -> instrucciones instruccion .)
+    $end            reduce using rule 8 (instrucciones -> instrucciones instruccion .)
+
+
+state 18
+
+    (4) definicion -> GRUPO ID . LBRACE servidores RBRACE
+
+    LBRACE          shift and go to state 23
+
+
+state 19
+
+    (15) despliegue -> DESPLEGAR ID . EN ID LBRACE acciones RBRACE
+
+    EN              shift and go to state 24
+
+
+state 20
+
+    (22) condicional -> SI LPAREN . VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE
+    (23) condicional -> SI LPAREN . VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE
+
+    VERIFICAR       shift and go to state 25
+
+
+state 21
+
+    (24) bucle -> MIENTRAS LPAREN . VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE
+
+    VERIFICAR       shift and go to state 26
+
+
+state 22
+
+    (25) asignacion -> VAR ID . EQUALS valor
+
+    EQUALS          shift and go to state 27
+
+
+state 23
+
+    (4) definicion -> GRUPO ID LBRACE . servidores RBRACE
+    (5) servidores -> . servidores servidor
+    (6) servidores -> . servidor
+    (7) servidor -> . SERVIDOR STRING DIRECCION EQUALS STRING
+
+    SERVIDOR        shift and go to state 30
+
+    servidores                     shift and go to state 28
+    servidor                       shift and go to state 29
+
+state 24
+
+    (15) despliegue -> DESPLEGAR ID EN . ID LBRACE acciones RBRACE
+
+    ID              shift and go to state 31
+
+
+state 25
+
+    (22) condicional -> SI LPAREN VERIFICAR . condicion RPAREN HACER LBRACE acciones RBRACE
+    (23) condicional -> SI LPAREN VERIFICAR . condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE
+    (28) condicion -> . ID comparador valor
+
+    ID              shift and go to state 33
+
+    condicion                      shift and go to state 32
+
+state 26
+
+    (24) bucle -> MIENTRAS LPAREN VERIFICAR . condicion RPAREN HACER LBRACE acciones RBRACE
+    (28) condicion -> . ID comparador valor
+
+    ID              shift and go to state 33
+
+    condicion                      shift and go to state 34
+
+state 27
+
+    (25) asignacion -> VAR ID EQUALS . valor
+    (26) valor -> . STRING
+    (27) valor -> . NUMBER
+
+    STRING          shift and go to state 36
+    NUMBER          shift and go to state 37
+
+    valor                          shift and go to state 35
+
+state 28
+
+    (4) definicion -> GRUPO ID LBRACE servidores . RBRACE
+    (5) servidores -> servidores . servidor
+    (7) servidor -> . SERVIDOR STRING DIRECCION EQUALS STRING
+
+    RBRACE          shift and go to state 38
+    SERVIDOR        shift and go to state 30
+
+    servidor                       shift and go to state 39
+
+state 29
+
+    (6) servidores -> servidor .
+
+    RBRACE          reduce using rule 6 (servidores -> servidor .)
+    SERVIDOR        reduce using rule 6 (servidores -> servidor .)
+
+
+state 30
+
+    (7) servidor -> SERVIDOR . STRING DIRECCION EQUALS STRING
+
+    STRING          shift and go to state 40
+
+
+state 31
+
+    (15) despliegue -> DESPLEGAR ID EN ID . LBRACE acciones RBRACE
+
+    LBRACE          shift and go to state 41
+
+
+state 32
+
+    (22) condicional -> SI LPAREN VERIFICAR condicion . RPAREN HACER LBRACE acciones RBRACE
+    (23) condicional -> SI LPAREN VERIFICAR condicion . RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE
+
+    RPAREN          shift and go to state 42
+
+
+state 33
+
+    (28) condicion -> ID . comparador valor
+    (29) comparador -> . EQ
+    (30) comparador -> . NEQ
+    (31) comparador -> . GT
+    (32) comparador -> . LT
+
+    EQ              shift and go to state 44
+    NEQ             shift and go to state 45
+    GT              shift and go to state 46
+    LT              shift and go to state 47
+
+    comparador                     shift and go to state 43
+
+state 34
+
+    (24) bucle -> MIENTRAS LPAREN VERIFICAR condicion . RPAREN HACER LBRACE acciones RBRACE
+
+    RPAREN          shift and go to state 48
+
+
+state 35
+
+    (25) asignacion -> VAR ID EQUALS valor .
+
+    DESPLEGAR       reduce using rule 25 (asignacion -> VAR ID EQUALS valor .)
+    SI              reduce using rule 25 (asignacion -> VAR ID EQUALS valor .)
+    MIENTRAS        reduce using rule 25 (asignacion -> VAR ID EQUALS valor .)
+    VAR             reduce using rule 25 (asignacion -> VAR ID EQUALS valor .)
+    $end            reduce using rule 25 (asignacion -> VAR ID EQUALS valor .)
+
+
+state 36
+
+    (26) valor -> STRING .
+
+    DESPLEGAR       reduce using rule 26 (valor -> STRING .)
+    SI              reduce using rule 26 (valor -> STRING .)
+    MIENTRAS        reduce using rule 26 (valor -> STRING .)
+    VAR             reduce using rule 26 (valor -> STRING .)
+    $end            reduce using rule 26 (valor -> STRING .)
+    RPAREN          reduce using rule 26 (valor -> STRING .)
+
+
+state 37
+
+    (27) valor -> NUMBER .
+
+    DESPLEGAR       reduce using rule 27 (valor -> NUMBER .)
+    SI              reduce using rule 27 (valor -> NUMBER .)
+    MIENTRAS        reduce using rule 27 (valor -> NUMBER .)
+    VAR             reduce using rule 27 (valor -> NUMBER .)
+    $end            reduce using rule 27 (valor -> NUMBER .)
+    RPAREN          reduce using rule 27 (valor -> NUMBER .)
+
+
+state 38
+
+    (4) definicion -> GRUPO ID LBRACE servidores RBRACE .
+
+    GRUPO           reduce using rule 4 (definicion -> GRUPO ID LBRACE servidores RBRACE .)
+    DESPLEGAR       reduce using rule 4 (definicion -> GRUPO ID LBRACE servidores RBRACE .)
+    SI              reduce using rule 4 (definicion -> GRUPO ID LBRACE servidores RBRACE .)
+    MIENTRAS        reduce using rule 4 (definicion -> GRUPO ID LBRACE servidores RBRACE .)
+    VAR             reduce using rule 4 (definicion -> GRUPO ID LBRACE servidores RBRACE .)
+    $end            reduce using rule 4 (definicion -> GRUPO ID LBRACE servidores RBRACE .)
+
+
+state 39
+
+    (5) servidores -> servidores servidor .
+
+    RBRACE          reduce using rule 5 (servidores -> servidores servidor .)
+    SERVIDOR        reduce using rule 5 (servidores -> servidores servidor .)
+
+
+state 40
+
+    (7) servidor -> SERVIDOR STRING . DIRECCION EQUALS STRING
+
+    DIRECCION       shift and go to state 49
+
+
+state 41
+
+    (15) despliegue -> DESPLEGAR ID EN ID LBRACE . acciones RBRACE
+    (16) acciones -> . acciones accion
+    (17) acciones -> . accion
+    (18) accion -> . PAQUETE STRING DEBE_ESTAR_INSTALADO
+    (19) accion -> . SERVICIO STRING DEBE_ESTAR_EN_EJECUCION
+    (20) accion -> . COPIAR_DESDE STRING HACIA STRING
+    (21) accion -> . EJECUTAR STRING
+
+    PAQUETE         shift and go to state 52
+    SERVICIO        shift and go to state 53
+    COPIAR_DESDE    shift and go to state 54
+    EJECUTAR        shift and go to state 55
+
+    acciones                       shift and go to state 50
+    accion                         shift and go to state 51
+
+state 42
+
+    (22) condicional -> SI LPAREN VERIFICAR condicion RPAREN . HACER LBRACE acciones RBRACE
+    (23) condicional -> SI LPAREN VERIFICAR condicion RPAREN . HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE
+
+    HACER           shift and go to state 56
+
+
+state 43
+
+    (28) condicion -> ID comparador . valor
+    (26) valor -> . STRING
+    (27) valor -> . NUMBER
+
+    STRING          shift and go to state 36
+    NUMBER          shift and go to state 37
+
+    valor                          shift and go to state 57
+
+state 44
+
+    (29) comparador -> EQ .
+
+    STRING          reduce using rule 29 (comparador -> EQ .)
+    NUMBER          reduce using rule 29 (comparador -> EQ .)
+
+
+state 45
+
+    (30) comparador -> NEQ .
+
+    STRING          reduce using rule 30 (comparador -> NEQ .)
+    NUMBER          reduce using rule 30 (comparador -> NEQ .)
+
+
+state 46
+
+    (31) comparador -> GT .
+
+    STRING          reduce using rule 31 (comparador -> GT .)
+    NUMBER          reduce using rule 31 (comparador -> GT .)
+
+
+state 47
+
+    (32) comparador -> LT .
+
+    STRING          reduce using rule 32 (comparador -> LT .)
+    NUMBER          reduce using rule 32 (comparador -> LT .)
+
+
+state 48
+
+    (24) bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN . HACER LBRACE acciones RBRACE
+
+    HACER           shift and go to state 58
+
+
+state 49
+
+    (7) servidor -> SERVIDOR STRING DIRECCION . EQUALS STRING
+
+    EQUALS          shift and go to state 59
+
+
+state 50
+
+    (15) despliegue -> DESPLEGAR ID EN ID LBRACE acciones . RBRACE
+    (16) acciones -> acciones . accion
+    (18) accion -> . PAQUETE STRING DEBE_ESTAR_INSTALADO
+    (19) accion -> . SERVICIO STRING DEBE_ESTAR_EN_EJECUCION
+    (20) accion -> . COPIAR_DESDE STRING HACIA STRING
+    (21) accion -> . EJECUTAR STRING
+
+    RBRACE          shift and go to state 60
+    PAQUETE         shift and go to state 52
+    SERVICIO        shift and go to state 53
+    COPIAR_DESDE    shift and go to state 54
+    EJECUTAR        shift and go to state 55
+
+    accion                         shift and go to state 61
+
+state 51
+
+    (17) acciones -> accion .
+
+    RBRACE          reduce using rule 17 (acciones -> accion .)
+    PAQUETE         reduce using rule 17 (acciones -> accion .)
+    SERVICIO        reduce using rule 17 (acciones -> accion .)
+    COPIAR_DESDE    reduce using rule 17 (acciones -> accion .)
+    EJECUTAR        reduce using rule 17 (acciones -> accion .)
+
+
+state 52
+
+    (18) accion -> PAQUETE . STRING DEBE_ESTAR_INSTALADO
+
+    STRING          shift and go to state 62
+
+
+state 53
+
+    (19) accion -> SERVICIO . STRING DEBE_ESTAR_EN_EJECUCION
+
+    STRING          shift and go to state 63
+
+
+state 54
+
+    (20) accion -> COPIAR_DESDE . STRING HACIA STRING
+
+    STRING          shift and go to state 64
+
+
+state 55
+
+    (21) accion -> EJECUTAR . STRING
+
+    STRING          shift and go to state 65
+
+
+state 56
+
+    (22) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER . LBRACE acciones RBRACE
+    (23) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER . LBRACE acciones RBRACE SINO LBRACE acciones RBRACE
+
+    LBRACE          shift and go to state 66
+
+
+state 57
+
+    (28) condicion -> ID comparador valor .
+
+    RPAREN          reduce using rule 28 (condicion -> ID comparador valor .)
+
+
+state 58
+
+    (24) bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER . LBRACE acciones RBRACE
+
+    LBRACE          shift and go to state 67
+
+
+state 59
+
+    (7) servidor -> SERVIDOR STRING DIRECCION EQUALS . STRING
+
+    STRING          shift and go to state 68
+
+
+state 60
+
+    (15) despliegue -> DESPLEGAR ID EN ID LBRACE acciones RBRACE .
+
+    DESPLEGAR       reduce using rule 15 (despliegue -> DESPLEGAR ID EN ID LBRACE acciones RBRACE .)
+    SI              reduce using rule 15 (despliegue -> DESPLEGAR ID EN ID LBRACE acciones RBRACE .)
+    MIENTRAS        reduce using rule 15 (despliegue -> DESPLEGAR ID EN ID LBRACE acciones RBRACE .)
+    VAR             reduce using rule 15 (despliegue -> DESPLEGAR ID EN ID LBRACE acciones RBRACE .)
+    $end            reduce using rule 15 (despliegue -> DESPLEGAR ID EN ID LBRACE acciones RBRACE .)
+
+
+state 61
+
+    (16) acciones -> acciones accion .
+
+    RBRACE          reduce using rule 16 (acciones -> acciones accion .)
+    PAQUETE         reduce using rule 16 (acciones -> acciones accion .)
+    SERVICIO        reduce using rule 16 (acciones -> acciones accion .)
+    COPIAR_DESDE    reduce using rule 16 (acciones -> acciones accion .)
+    EJECUTAR        reduce using rule 16 (acciones -> acciones accion .)
+
+
+state 62
+
+    (18) accion -> PAQUETE STRING . DEBE_ESTAR_INSTALADO
+
+    DEBE_ESTAR_INSTALADO shift and go to state 69
+
+
+state 63
+
+    (19) accion -> SERVICIO STRING . DEBE_ESTAR_EN_EJECUCION
+
+    DEBE_ESTAR_EN_EJECUCION shift and go to state 70
+
+
+state 64
+
+    (20) accion -> COPIAR_DESDE STRING . HACIA STRING
+
+    HACIA           shift and go to state 71
+
+
+state 65
+
+    (21) accion -> EJECUTAR STRING .
+
+    RBRACE          reduce using rule 21 (accion -> EJECUTAR STRING .)
+    PAQUETE         reduce using rule 21 (accion -> EJECUTAR STRING .)
+    SERVICIO        reduce using rule 21 (accion -> EJECUTAR STRING .)
+    COPIAR_DESDE    reduce using rule 21 (accion -> EJECUTAR STRING .)
+    EJECUTAR        reduce using rule 21 (accion -> EJECUTAR STRING .)
+
+
+state 66
+
+    (22) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE . acciones RBRACE
+    (23) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE . acciones RBRACE SINO LBRACE acciones RBRACE
+    (16) acciones -> . acciones accion
+    (17) acciones -> . accion
+    (18) accion -> . PAQUETE STRING DEBE_ESTAR_INSTALADO
+    (19) accion -> . SERVICIO STRING DEBE_ESTAR_EN_EJECUCION
+    (20) accion -> . COPIAR_DESDE STRING HACIA STRING
+    (21) accion -> . EJECUTAR STRING
+
+    PAQUETE         shift and go to state 52
+    SERVICIO        shift and go to state 53
+    COPIAR_DESDE    shift and go to state 54
+    EJECUTAR        shift and go to state 55
+
+    acciones                       shift and go to state 72
+    accion                         shift and go to state 51
+
+state 67
+
+    (24) bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE . acciones RBRACE
+    (16) acciones -> . acciones accion
+    (17) acciones -> . accion
+    (18) accion -> . PAQUETE STRING DEBE_ESTAR_INSTALADO
+    (19) accion -> . SERVICIO STRING DEBE_ESTAR_EN_EJECUCION
+    (20) accion -> . COPIAR_DESDE STRING HACIA STRING
+    (21) accion -> . EJECUTAR STRING
+
+    PAQUETE         shift and go to state 52
+    SERVICIO        shift and go to state 53
+    COPIAR_DESDE    shift and go to state 54
+    EJECUTAR        shift and go to state 55
+
+    acciones                       shift and go to state 73
+    accion                         shift and go to state 51
+
+state 68
+
+    (7) servidor -> SERVIDOR STRING DIRECCION EQUALS STRING .
+
+    RBRACE          reduce using rule 7 (servidor -> SERVIDOR STRING DIRECCION EQUALS STRING .)
+    SERVIDOR        reduce using rule 7 (servidor -> SERVIDOR STRING DIRECCION EQUALS STRING .)
+
+
+state 69
+
+    (18) accion -> PAQUETE STRING DEBE_ESTAR_INSTALADO .
+
+    RBRACE          reduce using rule 18 (accion -> PAQUETE STRING DEBE_ESTAR_INSTALADO .)
+    PAQUETE         reduce using rule 18 (accion -> PAQUETE STRING DEBE_ESTAR_INSTALADO .)
+    SERVICIO        reduce using rule 18 (accion -> PAQUETE STRING DEBE_ESTAR_INSTALADO .)
+    COPIAR_DESDE    reduce using rule 18 (accion -> PAQUETE STRING DEBE_ESTAR_INSTALADO .)
+    EJECUTAR        reduce using rule 18 (accion -> PAQUETE STRING DEBE_ESTAR_INSTALADO .)
+
+
+state 70
+
+    (19) accion -> SERVICIO STRING DEBE_ESTAR_EN_EJECUCION .
+
+    RBRACE          reduce using rule 19 (accion -> SERVICIO STRING DEBE_ESTAR_EN_EJECUCION .)
+    PAQUETE         reduce using rule 19 (accion -> SERVICIO STRING DEBE_ESTAR_EN_EJECUCION .)
+    SERVICIO        reduce using rule 19 (accion -> SERVICIO STRING DEBE_ESTAR_EN_EJECUCION .)
+    COPIAR_DESDE    reduce using rule 19 (accion -> SERVICIO STRING DEBE_ESTAR_EN_EJECUCION .)
+    EJECUTAR        reduce using rule 19 (accion -> SERVICIO STRING DEBE_ESTAR_EN_EJECUCION .)
+
+
+state 71
+
+    (20) accion -> COPIAR_DESDE STRING HACIA . STRING
+
+    STRING          shift and go to state 74
+
+
+state 72
+
+    (22) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones . RBRACE
+    (23) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones . RBRACE SINO LBRACE acciones RBRACE
+    (16) acciones -> acciones . accion
+    (18) accion -> . PAQUETE STRING DEBE_ESTAR_INSTALADO
+    (19) accion -> . SERVICIO STRING DEBE_ESTAR_EN_EJECUCION
+    (20) accion -> . COPIAR_DESDE STRING HACIA STRING
+    (21) accion -> . EJECUTAR STRING
+
+    RBRACE          shift and go to state 75
+    PAQUETE         shift and go to state 52
+    SERVICIO        shift and go to state 53
+    COPIAR_DESDE    shift and go to state 54
+    EJECUTAR        shift and go to state 55
+
+    accion                         shift and go to state 61
+
+state 73
+
+    (24) bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones . RBRACE
+    (16) acciones -> acciones . accion
+    (18) accion -> . PAQUETE STRING DEBE_ESTAR_INSTALADO
+    (19) accion -> . SERVICIO STRING DEBE_ESTAR_EN_EJECUCION
+    (20) accion -> . COPIAR_DESDE STRING HACIA STRING
+    (21) accion -> . EJECUTAR STRING
+
+    RBRACE          shift and go to state 76
+    PAQUETE         shift and go to state 52
+    SERVICIO        shift and go to state 53
+    COPIAR_DESDE    shift and go to state 54
+    EJECUTAR        shift and go to state 55
+
+    accion                         shift and go to state 61
+
+state 74
+
+    (20) accion -> COPIAR_DESDE STRING HACIA STRING .
+
+    RBRACE          reduce using rule 20 (accion -> COPIAR_DESDE STRING HACIA STRING .)
+    PAQUETE         reduce using rule 20 (accion -> COPIAR_DESDE STRING HACIA STRING .)
+    SERVICIO        reduce using rule 20 (accion -> COPIAR_DESDE STRING HACIA STRING .)
+    COPIAR_DESDE    reduce using rule 20 (accion -> COPIAR_DESDE STRING HACIA STRING .)
+    EJECUTAR        reduce using rule 20 (accion -> COPIAR_DESDE STRING HACIA STRING .)
+
+
+state 75
+
+    (22) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .
+    (23) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE . SINO LBRACE acciones RBRACE
+
+    DESPLEGAR       reduce using rule 22 (condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .)
+    SI              reduce using rule 22 (condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .)
+    MIENTRAS        reduce using rule 22 (condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .)
+    VAR             reduce using rule 22 (condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .)
+    $end            reduce using rule 22 (condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .)
+    SINO            shift and go to state 77
+
+
+state 76
+
+    (24) bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .
+
+    DESPLEGAR       reduce using rule 24 (bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .)
+    SI              reduce using rule 24 (bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .)
+    MIENTRAS        reduce using rule 24 (bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .)
+    VAR             reduce using rule 24 (bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .)
+    $end            reduce using rule 24 (bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE .)
+
+
+state 77
+
+    (23) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO . LBRACE acciones RBRACE
+
+    LBRACE          shift and go to state 78
+
+
+state 78
+
+    (23) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE . acciones RBRACE
+    (16) acciones -> . acciones accion
+    (17) acciones -> . accion
+    (18) accion -> . PAQUETE STRING DEBE_ESTAR_INSTALADO
+    (19) accion -> . SERVICIO STRING DEBE_ESTAR_EN_EJECUCION
+    (20) accion -> . COPIAR_DESDE STRING HACIA STRING
+    (21) accion -> . EJECUTAR STRING
+
+    PAQUETE         shift and go to state 52
+    SERVICIO        shift and go to state 53
+    COPIAR_DESDE    shift and go to state 54
+    EJECUTAR        shift and go to state 55
+
+    acciones                       shift and go to state 79
+    accion                         shift and go to state 51
+
+state 79
+
+    (23) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones . RBRACE
+    (16) acciones -> acciones . accion
+    (18) accion -> . PAQUETE STRING DEBE_ESTAR_INSTALADO
+    (19) accion -> . SERVICIO STRING DEBE_ESTAR_EN_EJECUCION
+    (20) accion -> . COPIAR_DESDE STRING HACIA STRING
+    (21) accion -> . EJECUTAR STRING
+
+    RBRACE          shift and go to state 80
+    PAQUETE         shift and go to state 52
+    SERVICIO        shift and go to state 53
+    COPIAR_DESDE    shift and go to state 54
+    EJECUTAR        shift and go to state 55
+
+    accion                         shift and go to state 61
+
+state 80
+
+    (23) condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE .
+
+    DESPLEGAR       reduce using rule 23 (condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE .)
+    SI              reduce using rule 23 (condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE .)
+    MIENTRAS        reduce using rule 23 (condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE .)
+    VAR             reduce using rule 23 (condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE .)
+    $end            reduce using rule 23 (condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for DESPLEGAR in state 2 resolved as shift
+WARNING: shift/reduce conflict for SI in state 2 resolved as shift
+WARNING: shift/reduce conflict for MIENTRAS in state 2 resolved as shift
+WARNING: shift/reduce conflict for VAR in state 2 resolved as shift
