@@ -27,19 +27,19 @@
 
 |        **Pila**       |    **Cadena**    |       **Transición**                              |
 |:----------------------|:-----------------|:--------------------------------------------------|
-| λ                     | VAR src = "/tmp" | δ(q0, λ, λ) ⇒ (q1, Z)                            |
-| Z                     | VAR src = "/tmp" | δ(q1, λ, λ) ⇒ (q2, P)                            |
-| Z P                   | VAR src = "/tmp" | δ(q2, λ, P) ⇒ (q2, DECLARACION)                  |
-| Z DECLARACION         | VAR src = "/tmp" | δ(q2, λ, DECLARACION) ⇒ (q2, VAR ASIGNACION)     |
-| Z ASIGNACION VAR      | VAR src = "/tmp" | δ(q2, VAR, VAR) ⇒ (q2, λ)                        |
-| Z ASIGNACION          | src = "/tmp"     | δ(q2, λ, ASIGNACION) ⇒ (q2, ID EQUALS EXPRESION) |
-| Z EXPRESION EQUALS ID | src = "/tmp"     | δ(q2, λ, ID) ⇒ (q2, src)                         |
-| Z EXPRESION EQUALS src| src = "/tmp"     | δ(q2, src, src) ⇒ (q2, λ)                        |
-| Z EXPRESION EQUALS    | = "/tmp"         | δ(q2, λ, EQUALS) ⇒ (q2, =)                       |
-| Z EXPRESION =         | = "/tmp"         | δ(q2, =, =) ⇒ (q2, λ)                            |
-| Z EXPRESION           | "/tmp"           | δ(q2, λ, EXPRESION) ⇒ (q2, STRING)               |
-| Z STRING              | "/tmp"           | δ(q2, λ, STRING) ⇒ (q2, "/tmp")                  |
-| Z "/tmp"              | "/tmp"           | δ(q2, "/tmp", "/tmp") ⇒ (q2, λ)                  |
-| Z                     | λ                | δ(q2, λ, Z) ⇒ (q3, λ)                            |
+| λ                     | VAR src = "/tmp" | δ(q0, λ, λ) ⇒ (q1, #)                            |
+| #                     | VAR src = "/tmp" | δ(q1, λ, λ) ⇒ (q2, S)                            |
+| #S                    | VAR src = "/tmp" | δ(q2, λ, S) ⇒ (q2, DECLARACION)                  |
+| # DECLARACION         | VAR src = "/tmp" | δ(q2, λ, DECLARACION) ⇒ (q2, VAR ASIGNACION)     |
+| # ASIGNACION VAR      | VAR src = "/tmp" | δ(q2, VAR, VAR) ⇒ (q2, λ)                        |
+| # ASIGNACION          | src = "/tmp"     | δ(q2, λ, ASIGNACION) ⇒ (q2, ID EQUALS EXPRESION) |
+| # EXPRESION EQUALS ID | src = "/tmp"     | δ(q2, λ, ID) ⇒ (q2, src)                         |
+| # EXPRESION EQUALS src| src = "/tmp"     | δ(q2, src, src) ⇒ (q2, λ)                        |
+| # EXPRESION EQUALS    | = "/tmp"         | δ(q2, λ, EQUALS) ⇒ (q2, =)                       |
+| # EXPRESION =         | = "/tmp"         | δ(q2, =, =) ⇒ (q2, λ)                            |
+| # EXPRESION           | "/tmp"           | δ(q2, λ, EXPRESION) ⇒ (q2, STRING)               |
+| # STRING              | "/tmp"           | δ(q2, λ, STRING) ⇒ (q2, "/tmp")                  |
+| # "/tmp"              | "/tmp"           | δ(q2, "/tmp", "/tmp") ⇒ (q2, λ)                  |
+| #                     | λ                | δ(q2, λ, #) ⇒ (q3, λ)                            |
 | λ                     | λ                | **accept**                                        |
 
