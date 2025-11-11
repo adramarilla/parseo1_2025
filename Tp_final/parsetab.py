@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ARCHIVO COLON CON COPIAR_DESDE DASH DEBE_ESTAR_EN_EJECUCION DEBE_ESTAR_INSTALADO DESPLEGAR DIRECCION EJECUTAR EN EQ EQUALS GRUPO GT HACER HACIA ID LBRACE LBRACKET LPAREN LT MIENTRAS NEQ NO_EXISTE NUMBER PAQUETE RBRACE RBRACKET RPAREN SERVICIO SERVIDOR SI SINO STRING VAR VERIFICARprograma : definiciones instruccionesdefiniciones : definiciones definicion\n                    | emptydefinicion : GRUPO ID LBRACE servidores RBRACEservidores : servidores servidor\n                  | servidorservidor : SERVIDOR STRING DIRECCION EQUALS STRINGinstrucciones : instrucciones instruccion\n                     | instruccion\n                     | emptyinstruccion : despliegue\n                   | condicional\n                   | bucle\n                   | asignaciondespliegue : DESPLEGAR ID EN ID LBRACE acciones RBRACEacciones : acciones accion\n                | accionaccion : PAQUETE STRING DEBE_ESTAR_INSTALADO\n              | SERVICIO STRING DEBE_ESTAR_EN_EJECUCION\n              | COPIAR_DESDE STRING HACIA STRING\n              | EJECUTAR STRINGcondicional : SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE\n                   | SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACEbucle : MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACEasignacion : VAR ID EQUALS valorvalor : STRING\n             | NUMBERcondicion : ID comparador valorcomparador : EQ\n                  | NEQ\n                  | GT\n                  | LTempty :'
+_lr_signature = 'ARCHIVO COLON CON COPIAR_DESDE DASH DEBE_ESTAR_EN_EJECUCION DEBE_ESTAR_INSTALADO DESPLEGAR DIRECCION EJECUTAR EN EQ EQUALS GRUPO GT HACER HACIA ID LBRACE LBRACKET LPAREN LT MIENTRAS NEQ NO_EXISTE NUMBER PAQUETE RBRACE RBRACKET RPAREN SERVICIO SERVIDOR SI SINO STRING VAR VERIFICARprograma : definiciones instruccionesdefiniciones : definiciones definicion\n                    | definicion\n                    | emptydefinicion : GRUPO ID LBRACE servidores RBRACEservidores : servidores servidor\n                  | servidorservidor : SERVIDOR STRING DIRECCION EQUALS STRINGinstrucciones : instrucciones instruccion\n                     | instruccion\n                     | emptyinstruccion : despliegue\n                   | asignacion\n                   | bucle\n                   | condicionalasignacion : VAR ID EQUALS valorvalor : STRING\n             | NUMBERdespliegue : DESPLEGAR ID EN ID LBRACE acciones RBRACEacciones : acciones accion\n                | accionaccion : PAQUETE STRING DEBE_ESTAR_INSTALADO\n              | SERVICIO STRING DEBE_ESTAR_EN_EJECUCION\n              | COPIAR_DESDE origen HACIA destino\n              | EJECUTAR STRINGorigen : STRING\n              | IDdestino : STRING\n               | IDcondicional : SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE\n                   | SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACEbucle : MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACEcondicion : ID NEQ valor\n                 | ID EQ valor\n                 | ID GT valor\n                 | ID LT valor\n                 | NO_EXISTE IDempty :'
     
-_lr_action_items = {'GRUPO':([0,2,3,5,38,],[-33,8,-3,-2,-4,]),'DESPLEGAR':([0,2,3,4,5,6,7,9,10,11,12,17,35,36,37,38,60,75,76,80,],[-33,13,-3,13,-2,-9,-10,-11,-12,-13,-14,-8,-25,-26,-27,-4,-15,-22,-24,-23,]),'SI':([0,2,3,4,5,6,7,9,10,11,12,17,35,36,37,38,60,75,76,80,],[-33,14,-3,14,-2,-9,-10,-11,-12,-13,-14,-8,-25,-26,-27,-4,-15,-22,-24,-23,]),'MIENTRAS':([0,2,3,4,5,6,7,9,10,11,12,17,35,36,37,38,60,75,76,80,],[-33,15,-3,15,-2,-9,-10,-11,-12,-13,-14,-8,-25,-26,-27,-4,-15,-22,-24,-23,]),'VAR':([0,2,3,4,5,6,7,9,10,11,12,17,35,36,37,38,60,75,76,80,],[-33,16,-3,16,-2,-9,-10,-11,-12,-13,-14,-8,-25,-26,-27,-4,-15,-22,-24,-23,]),'$end':([0,1,2,3,4,5,6,7,9,10,11,12,17,35,36,37,38,60,75,76,80,],[-33,0,-33,-3,-1,-2,-9,-10,-11,-12,-13,-14,-8,-25,-26,-27,-4,-15,-22,-24,-23,]),'ID':([8,13,16,24,25,26,],[18,19,22,31,33,33,]),'LPAREN':([14,15,],[20,21,]),'LBRACE':([18,31,56,58,77,],[23,41,66,67,78,]),'EN':([19,],[24,]),'VERIFICAR':([20,21,],[25,26,]),'EQUALS':([22,49,],[27,59,]),'SERVIDOR':([23,28,29,39,68,],[30,30,-6,-5,-7,]),'STRING':([27,30,43,44,45,46,47,52,53,54,55,59,71,],[36,40,36,-29,-30,-31,-32,62,63,64,65,68,74,]),'NUMBER':([27,43,44,45,46,47,],[37,37,-29,-30,-31,-32,]),'RBRACE':([28,29,39,50,51,61,65,68,69,70,72,73,74,79,],[38,-6,-5,60,-17,-16,-21,-7,-18,-19,75,76,-20,80,]),'RPAREN':([32,34,36,37,57,],[42,48,-26,-27,-28,]),'EQ':([33,],[44,]),'NEQ':([33,],[45,]),'GT':([33,],[46,]),'LT':([33,],[47,]),'DIRECCION':([40,],[49,]),'PAQUETE':([41,50,51,61,65,66,67,69,70,72,73,74,78,79,],[52,52,-17,-16,-21,52,52,-18,-19,52,52,-20,52,52,]),'SERVICIO':([41,50,51,61,65,66,67,69,70,72,73,74,78,79,],[53,53,-17,-16,-21,53,53,-18,-19,53,53,-20,53,53,]),'COPIAR_DESDE':([41,50,51,61,65,66,67,69,70,72,73,74,78,79,],[54,54,-17,-16,-21,54,54,-18,-19,54,54,-20,54,54,]),'EJECUTAR':([41,50,51,61,65,66,67,69,70,72,73,74,78,79,],[55,55,-17,-16,-21,55,55,-18,-19,55,55,-20,55,55,]),'HACER':([42,48,],[56,58,]),'DEBE_ESTAR_INSTALADO':([62,],[69,]),'DEBE_ESTAR_EN_EJECUCION':([63,],[70,]),'HACIA':([64,],[71,]),'SINO':([75,],[77,]),}
+_lr_action_items = {'GRUPO':([0,2,3,4,7,40,],[5,5,-3,-4,-2,-5,]),'DESPLEGAR':([0,2,3,4,6,7,8,9,10,11,12,13,19,33,34,35,40,65,84,85,89,],[-38,14,-3,-4,14,-2,-10,-11,-12,-13,-14,-15,-9,-16,-17,-18,-5,-19,-32,-30,-31,]),'VAR':([0,2,3,4,6,7,8,9,10,11,12,13,19,33,34,35,40,65,84,85,89,],[-38,15,-3,-4,15,-2,-10,-11,-12,-13,-14,-15,-9,-16,-17,-18,-5,-19,-32,-30,-31,]),'MIENTRAS':([0,2,3,4,6,7,8,9,10,11,12,13,19,33,34,35,40,65,84,85,89,],[-38,16,-3,-4,16,-2,-10,-11,-12,-13,-14,-15,-9,-16,-17,-18,-5,-19,-32,-30,-31,]),'SI':([0,2,3,4,6,7,8,9,10,11,12,13,19,33,34,35,40,65,84,85,89,],[-38,17,-3,-4,17,-2,-10,-11,-12,-13,-14,-15,-9,-16,-17,-18,-5,-19,-32,-30,-31,]),'$end':([0,1,2,3,4,6,7,8,9,10,11,12,13,19,33,34,35,40,65,84,85,89,],[-38,0,-38,-3,-4,-1,-2,-10,-11,-12,-13,-14,-15,-9,-16,-17,-18,-5,-19,-32,-30,-31,]),'ID':([5,14,15,25,27,28,38,56,78,],[18,20,21,32,37,37,49,71,83,]),'LPAREN':([16,17,],[22,23,]),'LBRACE':([18,32,58,63,86,],[24,43,73,74,87,]),'EN':([20,],[25,]),'EQUALS':([21,51,],[26,64,]),'VERIFICAR':([22,23,],[27,28,]),'SERVIDOR':([24,29,30,41,75,],[31,31,-7,-6,-8,]),'STRING':([26,31,45,46,47,48,54,55,56,57,64,78,],[34,42,34,34,34,34,67,68,70,72,75,82,]),'NUMBER':([26,45,46,47,48,],[35,35,35,35,35,]),'NO_EXISTE':([27,28,],[38,38,]),'RBRACE':([29,30,41,52,53,66,72,75,76,77,79,80,81,82,83,88,],[40,-7,-6,65,-21,-20,-25,-8,-22,-23,84,85,-24,-28,-29,89,]),'RPAREN':([34,35,36,39,49,59,60,61,62,],[-17,-18,44,50,-37,-33,-34,-35,-36,]),'NEQ':([37,],[45,]),'EQ':([37,],[46,]),'GT':([37,],[47,]),'LT':([37,],[48,]),'DIRECCION':([42,],[51,]),'PAQUETE':([43,52,53,66,72,73,74,76,77,79,80,81,82,83,87,88,],[54,54,-21,-20,-25,54,54,-22,-23,54,54,-24,-28,-29,54,54,]),'SERVICIO':([43,52,53,66,72,73,74,76,77,79,80,81,82,83,87,88,],[55,55,-21,-20,-25,55,55,-22,-23,55,55,-24,-28,-29,55,55,]),'COPIAR_DESDE':([43,52,53,66,72,73,74,76,77,79,80,81,82,83,87,88,],[56,56,-21,-20,-25,56,56,-22,-23,56,56,-24,-28,-29,56,56,]),'EJECUTAR':([43,52,53,66,72,73,74,76,77,79,80,81,82,83,87,88,],[57,57,-21,-20,-25,57,57,-22,-23,57,57,-24,-28,-29,57,57,]),'HACER':([44,50,],[58,63,]),'DEBE_ESTAR_INSTALADO':([67,],[76,]),'DEBE_ESTAR_EN_EJECUCION':([68,],[77,]),'HACIA':([69,70,71,],[78,-26,-27,]),'SINO':([85,],[86,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'programa':([0,],[1,]),'definiciones':([0,],[2,]),'empty':([0,2,],[3,7,]),'instrucciones':([2,],[4,]),'definicion':([2,],[5,]),'instruccion':([2,4,],[6,17,]),'despliegue':([2,4,],[9,9,]),'condicional':([2,4,],[10,10,]),'bucle':([2,4,],[11,11,]),'asignacion':([2,4,],[12,12,]),'servidores':([23,],[28,]),'servidor':([23,28,],[29,39,]),'condicion':([25,26,],[32,34,]),'valor':([27,43,],[35,57,]),'comparador':([33,],[43,]),'acciones':([41,66,67,78,],[50,72,73,79,]),'accion':([41,50,66,67,72,73,78,79,],[51,61,51,51,61,61,51,61,]),}
+_lr_goto_items = {'programa':([0,],[1,]),'definiciones':([0,],[2,]),'definicion':([0,2,],[3,7,]),'empty':([0,2,],[4,9,]),'instrucciones':([2,],[6,]),'instruccion':([2,6,],[8,19,]),'despliegue':([2,6,],[10,10,]),'asignacion':([2,6,],[11,11,]),'bucle':([2,6,],[12,12,]),'condicional':([2,6,],[13,13,]),'servidores':([24,],[29,]),'servidor':([24,29,],[30,41,]),'valor':([26,45,46,47,48,],[33,59,60,61,62,]),'condicion':([27,28,],[36,39,]),'acciones':([43,73,74,87,],[52,79,80,88,]),'accion':([43,52,73,74,79,80,87,88,],[53,66,53,53,66,66,53,66,]),'origen':([56,],[69,]),'destino':([78,],[81,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,37 +27,42 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> programa","S'",1,None,None,None),
-  ('programa -> definiciones instrucciones','programa',2,'p_programa','parser.py',9),
-  ('definiciones -> definiciones definicion','definiciones',2,'p_definiciones','parser.py',13),
-  ('definiciones -> empty','definiciones',1,'p_definiciones','parser.py',14),
-  ('definicion -> GRUPO ID LBRACE servidores RBRACE','definicion',5,'p_definicion','parser.py',17),
-  ('servidores -> servidores servidor','servidores',2,'p_servidores','parser.py',20),
-  ('servidores -> servidor','servidores',1,'p_servidores','parser.py',21),
-  ('servidor -> SERVIDOR STRING DIRECCION EQUALS STRING','servidor',5,'p_servidor','parser.py',24),
-  ('instrucciones -> instrucciones instruccion','instrucciones',2,'p_instrucciones','parser.py',27),
-  ('instrucciones -> instruccion','instrucciones',1,'p_instrucciones','parser.py',28),
-  ('instrucciones -> empty','instrucciones',1,'p_instrucciones','parser.py',29),
-  ('instruccion -> despliegue','instruccion',1,'p_instruccion','parser.py',32),
-  ('instruccion -> condicional','instruccion',1,'p_instruccion','parser.py',33),
-  ('instruccion -> bucle','instruccion',1,'p_instruccion','parser.py',34),
-  ('instruccion -> asignacion','instruccion',1,'p_instruccion','parser.py',35),
-  ('despliegue -> DESPLEGAR ID EN ID LBRACE acciones RBRACE','despliegue',7,'p_despliegue','parser.py',38),
-  ('acciones -> acciones accion','acciones',2,'p_acciones','parser.py',41),
-  ('acciones -> accion','acciones',1,'p_acciones','parser.py',42),
-  ('accion -> PAQUETE STRING DEBE_ESTAR_INSTALADO','accion',3,'p_accion','parser.py',45),
-  ('accion -> SERVICIO STRING DEBE_ESTAR_EN_EJECUCION','accion',3,'p_accion','parser.py',46),
-  ('accion -> COPIAR_DESDE STRING HACIA STRING','accion',4,'p_accion','parser.py',47),
-  ('accion -> EJECUTAR STRING','accion',2,'p_accion','parser.py',48),
-  ('condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE','condicional',9,'p_condicional','parser.py',51),
-  ('condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE','condicional',13,'p_condicional','parser.py',52),
-  ('bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE','bucle',9,'p_bucle','parser.py',55),
-  ('asignacion -> VAR ID EQUALS valor','asignacion',4,'p_asignacion','parser.py',58),
-  ('valor -> STRING','valor',1,'p_valor','parser.py',61),
-  ('valor -> NUMBER','valor',1,'p_valor','parser.py',62),
-  ('condicion -> ID comparador valor','condicion',3,'p_condicion','parser.py',65),
-  ('comparador -> EQ','comparador',1,'p_comparador','parser.py',68),
-  ('comparador -> NEQ','comparador',1,'p_comparador','parser.py',69),
-  ('comparador -> GT','comparador',1,'p_comparador','parser.py',70),
-  ('comparador -> LT','comparador',1,'p_comparador','parser.py',71),
-  ('empty -> <empty>','empty',0,'p_empty','parser.py',74),
+  ('programa -> definiciones instrucciones','programa',2,'p_programa','parser.py',13),
+  ('definiciones -> definiciones definicion','definiciones',2,'p_definiciones','parser.py',22),
+  ('definiciones -> definicion','definiciones',1,'p_definiciones','parser.py',23),
+  ('definiciones -> empty','definiciones',1,'p_definiciones','parser.py',24),
+  ('definicion -> GRUPO ID LBRACE servidores RBRACE','definicion',5,'p_definicion','parser.py',33),
+  ('servidores -> servidores servidor','servidores',2,'p_servidores','parser.py',38),
+  ('servidores -> servidor','servidores',1,'p_servidores','parser.py',39),
+  ('servidor -> SERVIDOR STRING DIRECCION EQUALS STRING','servidor',5,'p_servidor','parser.py',46),
+  ('instrucciones -> instrucciones instruccion','instrucciones',2,'p_instrucciones','parser.py',54),
+  ('instrucciones -> instruccion','instrucciones',1,'p_instrucciones','parser.py',55),
+  ('instrucciones -> empty','instrucciones',1,'p_instrucciones','parser.py',56),
+  ('instruccion -> despliegue','instruccion',1,'p_instruccion','parser.py',65),
+  ('instruccion -> asignacion','instruccion',1,'p_instruccion','parser.py',66),
+  ('instruccion -> bucle','instruccion',1,'p_instruccion','parser.py',67),
+  ('instruccion -> condicional','instruccion',1,'p_instruccion','parser.py',68),
+  ('asignacion -> VAR ID EQUALS valor','asignacion',4,'p_asignacion','parser.py',75),
+  ('valor -> STRING','valor',1,'p_valor','parser.py',80),
+  ('valor -> NUMBER','valor',1,'p_valor','parser.py',81),
+  ('despliegue -> DESPLEGAR ID EN ID LBRACE acciones RBRACE','despliegue',7,'p_despliegue','parser.py',88),
+  ('acciones -> acciones accion','acciones',2,'p_acciones','parser.py',93),
+  ('acciones -> accion','acciones',1,'p_acciones','parser.py',94),
+  ('accion -> PAQUETE STRING DEBE_ESTAR_INSTALADO','accion',3,'p_accion','parser.py',101),
+  ('accion -> SERVICIO STRING DEBE_ESTAR_EN_EJECUCION','accion',3,'p_accion','parser.py',102),
+  ('accion -> COPIAR_DESDE origen HACIA destino','accion',4,'p_accion','parser.py',103),
+  ('accion -> EJECUTAR STRING','accion',2,'p_accion','parser.py',104),
+  ('origen -> STRING','origen',1,'p_origen','parser.py',115),
+  ('origen -> ID','origen',1,'p_origen','parser.py',116),
+  ('destino -> STRING','destino',1,'p_destino','parser.py',120),
+  ('destino -> ID','destino',1,'p_destino','parser.py',121),
+  ('condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE','condicional',9,'p_condicional','parser.py',128),
+  ('condicional -> SI LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE SINO LBRACE acciones RBRACE','condicional',13,'p_condicional','parser.py',129),
+  ('bucle -> MIENTRAS LPAREN VERIFICAR condicion RPAREN HACER LBRACE acciones RBRACE','bucle',9,'p_bucle','parser.py',139),
+  ('condicion -> ID NEQ valor','condicion',3,'p_condicion','parser.py',146),
+  ('condicion -> ID EQ valor','condicion',3,'p_condicion','parser.py',147),
+  ('condicion -> ID GT valor','condicion',3,'p_condicion','parser.py',148),
+  ('condicion -> ID LT valor','condicion',3,'p_condicion','parser.py',149),
+  ('condicion -> NO_EXISTE ID','condicion',2,'p_condicion','parser.py',150),
+  ('empty -> <empty>','empty',0,'p_empty','parser.py',160),
 ]
