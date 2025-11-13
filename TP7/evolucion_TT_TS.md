@@ -1,10 +1,10 @@
 
-# TT y TS — Evolución paso a paso  
+# TT y TS 
 ## Fragmento analizado
 
 ```
 L1: VAR archivo = "/etc/config.conf"
-
+L2: 
 L3: SI (VERIFICAR NO_EXISTE archivo) HACER {
 L4:     EJECUTAR ARCHIVO archivo
 L5: }
@@ -37,9 +37,9 @@ La condición `VERIFICAR NO_EXISTE archivo` devuelve un booleano.
 
 ### TT
 | Linea PRG | Cod | Nombre  | TipoBase | Padre | Dimensión | Mínimo | Máximo | Ámbito | Observaciones |
-|-----------|-----|----------|----------|-------|-----------|--------|--------|--------|----------------|
-| L1        | 0   | string   | -1       | -1    | 1         | -1     | -1     | 0      | primitivo      |
-| L3        | 1   | boolean  | -1       | -1    | 1         | -1     | -1     | 0      | primitivo      |
+|-----------|-----|---------|----------|-------|-----------|--------|--------|--------|---------------|
+| L1        | 0   | string  | -1       | -1    | 1         | -1     | -1     | 0      | primitivo     |
+| L3        | 1   | boolean | -1       | -1    | 1         | -1     | -1     | 0      | primitivo     |
 
 ---
 
@@ -63,8 +63,8 @@ TS vacía
 
 ### TS
 | Linea PRG | Cod | Nombre  | Categoria | Tipo | NumPar | ListaPar | Ámbito | Observaciones |
-|-----------|-----|----------|-----------|------|--------|----------|--------|----------------|
-| L1        | 0   | archivo | variable  | 0    | -1     | -1       | 0      | inicializada |
+|-----------|-----|---------|-----------|------|--------|----------|--------|---------------|
+| L1        | 0   | archivo | variable  | 0    | -1     | -1       | 0      | inicializada  |
 
 ---
 
@@ -74,8 +74,8 @@ TS vacía
 → Se anotan observaciones.
 
 ### TS
-| Linea PRG | Cod | Nombre  | Categoria | Tipo | NumPar | ListaPar | Ámbito | Observaciones                               |
-|-----------|-----|----------|-----------|------|--------|----------|--------|----------------------------------------------|
+| Linea PRG | Cod | Nombre  | Categoria | Tipo | NumPar | ListaPar | Ámbito | Observaciones                                |
+|-----------|-----|---------|-----------|------|--------|----------|--------|----------------------------------------------|
 | L1        | 0   | archivo | variable  | 0    | -1     | -1       | 0      | inicializada; usada en condición (L3)        |
 
 ---
