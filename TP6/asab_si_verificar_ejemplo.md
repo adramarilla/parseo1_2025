@@ -1,5 +1,4 @@
 
-# ASAB con Retroceso — Ejemplo Completo
 # ASAB con Retroceso — Cadena `VAR src = "/tmp"`
 
 Gramática utilizada:
@@ -35,7 +34,7 @@ Entrada: `VAR id = STRING $`
 ---
 
 ## Cadena
-Se especifica otra palabra distinta.
+Se especifica otra cadena distinta del lenguaje.
 
 ```
 SI ( VERIFICAR NO_EXISTE archivo ) HACER {
@@ -47,46 +46,105 @@ Tokenizada como:
 ```
 SI ( VERIFICAR NO_EXISTE ID ) HACER { EJECUTAR ARCHIVO ID } $
 ```
-
 ---
 
-# Gramática utilizada
+# BNF utilizada
+
+``` bnf
+P → IF_STMT
+
+IF_STMT → SI LPAREN COND RPAREN HACER BLOCK
+
+COND → VERIFICAR NO_EXISTE ID
+
+BLOCK → LBRACE STMT RBRACE
+
+STMT → EJECUTAR ARCHIVO ID
 ```
-S        → IfStmt
-IfStmt   → SI LPAREN Cond RPAREN HACER Block
-Cond     → VERIFICAR NO_EXISTE ID
-Block    → LBRACE Stmt RBRACE
-Stmt     → EJECUTAR ARCHIVO ID
-```
 
----
+No terminales: `P, IF_STMT, COND, BLOCK, STMT`\
+Terminales:
+`SI, LPAREN, RPAREN, VERIFICAR, NO_EXISTE, ID, HACER, LBRACE, RBRACE, EJECUTAR, ARCHIVO`\
+Símbolo inicial: `P`
 
-# ASAB con Retroceso (Formato TP6)
+------------------------------------------------------------------------
 
-| Pila | Entrada | Acción |
-|------|---------|--------|
-| `#` | `SI ( VERIFICAR NO_EXISTE ID ) HACER { EJECUTAR ARCHIVO ID } $` | δ(q0, λ, λ) ⇒ (#, S) |
-| `# S` | `SI ( ...` | expandir S ⇒ IfStmt |
-| `# IfStmt` | `SI ( ...` | expandir IfStmt ⇒ SI LPAREN Cond RPAREN HACER Block |
-| `# SI LPAREN Cond RPAREN HACER Block` | `SI ( ...` | shift |
-| `# SI LPAREN Cond RPAREN HACER Block SI` | `( VERIFICAR ...` | shift |
-| `# LPAREN SI Cond RPAREN HACER Block` | `VERIFICAR NO_EXISTE ...` | shift |
-| `# VERIFICAR LPAREN SI Cond RPAREN HACER Block` | `NO_EXISTE ID ...` | shift |
-| `# NO_EXISTE VERIFICAR LPAREN SI Cond RPAREN HACER Block` | `ID ) ...` | shift |
-| `# ID NO_EXISTE VERIFICAR LPAREN SI Cond RPAREN HACER Block` | `) HACER ...` | reduce (Cond → VERIFICAR NO_EXISTE ID) |
-| `# Cond LPAREN SI RPAREN HACER Block` | `) HACER ...` | shift |
-| `# RPAREN Cond LPAREN SI HACER Block` | `HACER { ...` | shift |
-| `# HACER RPAREN Cond LPAREN SI Block` | `{ EJECUTAR ...` | shift |
-| `# LBRACE HACER RPAREN Cond LPAREN SI Stmt RBRACE` | `EJECUTAR ARCHIVO ID } ...` | shift |
-| `# EJECUTAR LBRACE ... ARCHIVO ID RBRACE` | `ARCHIVO ID } ...` | shift |
-| `# ARCHIVO EJECUTAR ... ID RBRACE` | `ID } ...` | shift |
-| `# ID ARCHIVO EJECUTAR ... RBRACE` | `} $` | reduce (Stmt → EJECUTAR ARCHIVO ID) |
-| `# Stmt LBRACE ... RBRACE` | `} $` | shift |
-| `# RBRACE Stmt LBRACE ...` | `$` | reduce (Block → LBRACE Stmt RBRACE) |
-| `# Block RPAREN Cond LPAREN SI` | `$` | reduce (IfStmt → SI LPAREN Cond RPAREN HACER Block) |
-| `# IfStmt` | `$` | reduce (S → IfStmt) |
-| `# S` | `$` | **aceptar** |
+## 2. **Tabla de reducciones (ASAB)**
 
----
+  Secuencia en la pila                  Reducir a
+  ------------------------------------- -----------
+  `EJECUTAR ARCHIVO ID`                 `STMT`
+  `LBRACE STMT RBRACE`                  `BLOCK`
+  `VERIFICAR NO_EXISTE ID`              `COND`
+  `SI LPAREN COND RPAREN HACER BLOCK`   `IF_STMT`
+  `IF_STMT`                             `P`
 
-La cadena completa es **aceptada** por el ASAB con retroceso.
+------------------------------------------------------------------------
+
+## 3. **Entrada tokenizada**
+
+    SI LPAREN VERIFICAR NO_EXISTE ID RPAREN HACER LBRACE EJECUTAR ARCHIVO ID RBRACE $
+
+
+## 4. **Simulación completa del ASAB**
+
+  ----------------------------------------------------------------------------------
+  **Pila**                **Entrada**                             **Transición**
+  ----------------------- --------------------------------------- ------------------
+  λ                       SI ( VERIFICAR NO_EXISTE ID ) HACER {   δ(q0,λ,λ) → (#)
+                          EJECUTAR ARCHIVO ID } \$                
+
+  \#                      SI ... \$                               shift(SI)
+
+  \# SI                   ( VERIFICAR NO_EXISTE ID ) HACER {      shift(LPAREN)
+                          EJECUTAR ARCHIVO ID } \$                
+
+  \# SI LPAREN            VERIFICAR NO_EXISTE ID ) ...            shift(VERIFICAR)
+
+  \# SI LPAREN VERIFICAR  NO_EXISTE ID ) ...                      shift(NO_EXISTE)
+
+  \# SI LPAREN VERIFICAR  ID ) ...                                shift(ID)
+  NO_EXISTE                                                       
+
+  \# SI LPAREN VERIFICAR  ) HACER ...                             reduce → COND
+  NO_EXISTE ID                                                    
+
+  \# SI LPAREN COND       ) HACER ...                             shift(RPAREN)
+
+  \# SI LPAREN COND       HACER { EJECUTAR...                     shift(HACER)
+  RPAREN                                                          
+
+  \# SI LPAREN COND       { EJECUTAR ARCHIVO ID } \$              shift(LBRACE)
+  RPAREN HACER                                                    
+
+  \# SI LPAREN COND       EJECUTAR ARCHIVO ID } \$                shift(EJECUTAR)
+  RPAREN HACER LBRACE                                             
+
+  \# ... EJECUTAR         ARCHIVO ID } \$                         shift(ARCHIVO)
+
+  \# ... EJECUTAR ARCHIVO ID } \$                                 shift(ID)
+
+  \# ... EJECUTAR ARCHIVO } \$                                    reduce → STMT
+  ID                                                              
+
+  \# ... LBRACE STMT      } \$                                    shift(RBRACE)
+
+  \# ... LBRACE STMT      \$                                      reduce → BLOCK
+  RBRACE                                                          
+
+  \# SI LPAREN COND       \$                                      reduce → IF_STMT
+  RPAREN HACER BLOCK                                              
+
+  \# IF_STMT              \$                                      reduce → P
+
+  \# P                    \$                                      **Aceptar**
+  ----------------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+## 5. **Conclusión**
+
+La cadena es aceptada por el analizador sintáctico ascendente con
+backtracking (ASAB).
+
+------------------------------------------------------------------------
