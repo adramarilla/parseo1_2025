@@ -123,8 +123,8 @@ SI (VERIFICAR NO_EXISTE archivo) HACER {
     EJECUTAR "crear archivo de configuración"
 }
 
-VAR src = "/tmp"
-VAR dest = "/bkp"
+VAR src = /tmp
+VAR dest = /bkp
 
 '''
 

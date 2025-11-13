@@ -9,14 +9,17 @@
 ## Objetivo
 
 Realizar una herramienta de automatización para configuración de servidores y ejecutar acciones de manera declarativa.
-
+En este TP se define el componente léxico del lenguaje. El lexer toma un archivo de texto y lo convierte en una secuencia de tokens, que luego serán usados por el parser
 ---
 
 ## Especificaciones léxicas
 
 - **Palabras clave:**  
-  `SERVIDOR`, `GRUPO`, `DESPLEGAR`, `ARCHIVO`, `PAQUETE`, `SERVICIO`,  
-  `EJECUTAR`, `COPIAR_DESDE`, `EN`, `CON`, `VERIFICAR`, `SI`, `NO_EXISTE`
+Estas palabras tienen un significado fijo en el lenguaje y no pueden ser usadas como nombres.
+ `VAR`,`SERVIDOR`, `GRUPO`, `DESPLEGAR`, `ARCHIVO`, `PAQUETE`, `SERVICIO`,  
+  `EJECUTAR`, `COPIAR_DESDE`, `HACIA`, `EN`, `CON`, `VERIFICAR`, `NO_EXISTE`,
+  `DIRECCION`, `HACER`, `DEBE_ESTAR_INSTALADO`, `DEBE_ESTAR_EN_EJECUCION`, 
+  `SI`,`SINO`,`MIENTRAS`
 
 - **Identificadores:**  
   Nombres de servidores (`"web01"`, `"db_production"`),  
@@ -25,7 +28,7 @@ Realizar una herramienta de automatización para configuración de servidores y 
   rutas (`"/var/www/app"`).
 
 - **Literales:**  
-  Strings (para comandos, rutas, contenido) y números (para puertos).
+  STRING (para comandos, rutas, contenido), NUMBER (para puertos), ID (para nombre de servidores, grupos, ruta sin comillas)
 
 - **Operadores:**  
   `=`, `==`, `!=`, `>`, `<` (para comparaciones en verificaciones).
@@ -34,6 +37,14 @@ Realizar una herramienta de automatización para configuración de servidores y 
   `{`, `}`, `[`, `]`, `(`, `)`, `:`, `-` (para bloques, listas y parámetros).
 
 ---
+
+## Reglas léxicas
+Cada token se define mediante una expresión regular. Por ejemplo:
+
+• Un ID es una secuencia de letras, números y guiones bajos que empieza con letra.
+• Un STRING es cualquier texto entre comillas dobles.
+• Los números se reconocen como secuencias de dígitos.
+• Las palabras reservadas se detectan antes y se cargan en el diccionario reserved.
 
 ## Especificaciones sintácticas
 
@@ -72,3 +83,5 @@ DESPLEGAR mi_aplicacion EN webservers {
 - **Tabla de símbolos:** Llevar un registro de todos los servidores, grupos y sus propiedades.
 
 ---
+## Resumen
+El lexer convierte el texto fuente en una secuencia de tokens que el parser podrá procesar sin ambigüedades.
