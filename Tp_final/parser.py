@@ -97,11 +97,16 @@ def p_acciones(p):
     else:
         p[0] = [p[1]]
 
+# -----------------------
+# ACCIONES (CORREGIDAS)
+# -----------------------
 def p_accion(p):
     '''accion : PAQUETE STRING DEBE_ESTAR_INSTALADO
               | SERVICIO STRING DEBE_ESTAR_EN_EJECUCION
               | COPIAR_DESDE origen HACIA destino
-              | EJECUTAR STRING'''
+              | EJECUTAR STRING
+              | EJECUTAR ARCHIVO ID'''
+    
     if p[1] == "COPIAR_DESDE":
         p[0] = ("copiar", p[2], p[4])
     elif p[1] == "PAQUETE":
@@ -109,7 +114,11 @@ def p_accion(p):
     elif p[1] == "SERVICIO":
         p[0] = ("servicio", p[2])
     elif p[1] == "EJECUTAR":
-        p[0] = ("ejecutar", p[2])
+        if len(p) == 3:
+            p[0] = ("ejecutar", p[2])
+        else:
+            # EJECUTAR ARCHIVO ID
+            p[0] = ("ejecutar_archivo", p[3])
 
 def p_origen(p):
     '''origen : STRING

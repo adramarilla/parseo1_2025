@@ -120,11 +120,13 @@ MIENTRAS (VERIFICAR puerto != 80) HACER {
 }
 
 SI (VERIFICAR NO_EXISTE archivo) HACER {
-    EJECUTAR "crear archivo de configuración"
+    EJECUTAR archivo
 }
 
-VAR src = /tmp
-VAR dest = /bkp
+VAR src = "/tmp"
+VAR dest = "/bkp"
+VAR archivo = "/etc/config.conf"
+
 
 '''
 

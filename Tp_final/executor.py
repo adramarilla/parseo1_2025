@@ -27,19 +27,26 @@ def ejecutar(ast, symtab):
 
 def ejecutar_accion(accion):
     tipo = accion[0]
+
     if tipo == "copiar":
         print(f"  Copiando de {accion[1]} hacia {accion[2]}")
+
     elif tipo == "paquete":
         print(f"  Asegurando paquete '{accion[1]}' instalado")
+
     elif tipo == "servicio":
         print(f"  Asegurando servicio '{accion[1]}' en ejecución")
+
     elif tipo == "ejecutar":
         print(f"  Ejecutando comando: {accion[1]}")
+
+    elif tipo == "ejecutar_archivo":
+        print(f"  Ejecutando archivo: {accion[1]}")
 
 
 def ejecutar_bucle(condicion, acciones):
     print(f"    (Evaluar condición: {condicion})")
-    for _ in range(2):  # simula 2 iteraciones
+    for _ in range(2):  # Simula 2 iteraciones
         for accion in acciones:
             ejecutar_accion(accion)
 
