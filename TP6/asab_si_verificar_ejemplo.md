@@ -37,8 +37,8 @@ Entrada: `VAR id = STRING $`
 Se especifica otra cadena distinta del lenguaje.
 
 ```
-SI ( VERIFICAR NO_EXISTE archivo ) HACER {
-    EJECUTAR ARCHIVO archivo
+SI ( VERIFICAR NO_EXISTE archivo_conf ) HACER {
+    EJECUTAR ARCHIVO archivo_conf
 }
 ```
 

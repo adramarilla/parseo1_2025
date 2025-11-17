@@ -3,10 +3,10 @@
 ## Fragmento analizado
 
 ```
-L1: VAR archivo = "/etc/config.conf"
+L1: VAR archivo_conf = "/etc/config.conf"
 L2: 
-L3: SI (VERIFICAR NO_EXISTE archivo) HACER {
-L4:     EJECUTAR ARCHIVO archivo
+L3: SI (VERIFICAR NO_EXISTE archivo_conf) HACER {
+L4:     EJECUTAR ARCHIVO archivo_conf
 L5: }
 ```
 
@@ -21,7 +21,7 @@ TT vacía → sólo se cargarán tipos primitivos cuando aparezcan en el program
 
 ---
 
-## **Luego de L1: VAR archivo = "/etc/config.conf"**
+## **Luego de L1: VAR archivo_conf = "/etc/config.conf"**
 Se detecta un literal string → se incorpora el tipo `string`.
 
 ### TT
@@ -31,8 +31,8 @@ Se detecta un literal string → se incorpora el tipo `string`.
 
 ---
 
-## **Luego de L3: SI (VERIFICAR NO_EXISTE archivo) ...**
-La condición `VERIFICAR NO_EXISTE archivo` devuelve un booleano.  
+## **Luego de L3: SI (VERIFICAR NO_EXISTE archivo_conf) ...**
+La condición `VERIFICAR NO_EXISTE archivo_conf` devuelve un booleano.  
 → Se agrega el tipo `boolean`.
 
 ### TT
@@ -59,32 +59,32 @@ TS vacía
 
 ---
 
-## **Luego de L1: VAR archivo = "/etc/config.conf"**
+## **Luego de L1: VAR archivo_conf = "/etc/config.conf"**
 
 ### TS
 | Linea PRG | Cod | Nombre  | Categoria | Tipo | NumPar | ListaPar | Ámbito | Observaciones |
 |-----------|-----|---------|-----------|------|--------|----------|--------|---------------|
-| L1        | 0   | archivo | variable  | 0    | -1     | -1       | 0      | inicializada  |
+| L1        | 0   | archivo_conf | variable  | 0    | -1     | -1       | 0      | inicializada  |
 
 ---
 
-## **Luego de L3: uso de archivo en la condición**
+## **Luego de L3: uso de archivo_conf en la condición**
 
-`archivo` ya existe → se usa, no se agrega entrada nueva.  
+`archivo_conf` ya existe → se usa, no se agrega entrada nueva.  
 → Se anotan observaciones.
 
 ### TS
 | Linea PRG | Cod | Nombre  | Categoria | Tipo | NumPar | ListaPar | Ámbito | Observaciones                                |
 |-----------|-----|---------|-----------|------|--------|----------|--------|----------------------------------------------|
-| L1        | 0   | archivo | variable  | 0    | -1     | -1       | 0      | inicializada; usada en condición (L3)        |
+| L1        | 0   | archivo_conf | variable  | 0    | -1     | -1       | 0      | inicializada; usada en condición (L3)        |
 
 ---
 
-## **Luego de L4: EJECUTAR ARCHIVO archivo**
+## **Luego de L4: EJECUTAR ARCHIVO archivo_conf**
 
-`archivo` vuelve a usarse → se actualiza observación.
+`archivo_conf` vuelve a usarse → se actualiza observación.
 
 ### TS Final
 | Linea PRG | Cod | Nombre  | Categoria | Tipo | NumPar | ListaPar | Ámbito | Observaciones                                                |
 |-----------|-----|----------|-----------|------|--------|----------|--------|----------------------------------------------------------------|
-| L1        | 0   | archivo | variable  | 0    | -1     | -1       | 0      | inicializada (L1); usada en condición (L3) y bloque (L4)      |
+| L1        | 0   | archivo_conf | variable  | 0    | -1     | -1       | 0      | inicializada (L1); usada en condición (L3) y bloque (L4)      |

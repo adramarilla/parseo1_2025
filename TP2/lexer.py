@@ -119,13 +119,13 @@ MIENTRAS (VERIFICAR puerto != 80) HACER {
     EJECUTAR "reiniciar nginx"
 }
 
-SI (VERIFICAR NO_EXISTE archivo) HACER {
-    EJECUTAR archivo
+SI (VERIFICAR NO_EXISTE archivo_conf) HACER {
+    EJECUTAR archivo_conf
 }
 
 VAR src = "/tmp"
 VAR dest = "/bkp"
-VAR archivo = "/etc/config.conf"
+VAR archivo_conf = "/etc/config.conf"
 
 
 '''
